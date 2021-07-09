@@ -346,7 +346,7 @@ public class SwiftAudioplayersPlugin: NSObject, FlutterPlugin {
         if hasPlaying {
             return
         }
-        configureAudioSession(active: false, options: .notifyOthersOnDeactivation)
+        configureAudioSession(active: false)
     }
     
     func lastPlayer() -> WrappedMediaPlayer? {
@@ -384,7 +384,7 @@ public class SwiftAudioplayersPlugin: NSObject, FlutterPlugin {
                 try session.setCategory(category, options: options)
             }
             if let active = active {
-                try session.setActive(active)
+                try session.setActive(active,options: .notifyOthersOnDeactivation)
             }
         } catch {
             log("Error configuring audio session: %@", error)
