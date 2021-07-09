@@ -552,6 +552,16 @@ class AudioPlayer {
     }
   }
 
+  /// Only implemented on iOS
+  /// Deactivate iOS AVAudioSession
+  /// It will call AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+  Future<int> deactivateAudioSession() {
+    if (defaultTargetPlatform != TargetPlatform.iOS) {
+      return Future.value();
+    }
+    return _invokeMethod('deactivateAudioSession');
+  }
+
   static Future<void> _doHandlePlatformCall(MethodCall call) async {
     final Map<dynamic, dynamic> callArgs = call.arguments as Map;
     _log('_platformCallHandler call ${call.method} $callArgs');

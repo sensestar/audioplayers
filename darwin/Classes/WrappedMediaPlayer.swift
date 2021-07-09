@@ -179,7 +179,6 @@ class WrappedMediaPlayer {
             resume()
         }
         
-        reference.maybeDeactivateAudioSession()
         reference.onComplete(playerId: playerId)
         reference.notificationsHandler?.onNotificationBackgroundPlayerStateChanged(playerId: playerId, value: "completed")
     }

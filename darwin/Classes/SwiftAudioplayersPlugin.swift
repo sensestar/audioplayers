@@ -152,6 +152,8 @@ public class SwiftAudioplayersPlugin: NSObject, FlutterPlugin {
             player.stop()
         } else if method == "release" {
             player.release()
+        } else if method == "deactivateAudioSession" {
+            self.deactivateAudioSession()
         } else if method == "seek" {
             let position = args["position"] as? Int
             if let position = position {
@@ -337,6 +339,14 @@ public class SwiftAudioplayersPlugin: NSObject, FlutterPlugin {
             configureAudioSession(active: false)
             #endif
         }
+    }
+    
+    func deactivateAudioSession() {
+        let hasPlaying: Bool = players.values.contains { player in player.isPlaying }
+        if hasPlaying {
+            return
+        }
+        configureAudioSession(active: false, options: .notifyOthersOnDeactivation)
     }
     
     func lastPlayer() -> WrappedMediaPlayer? {
