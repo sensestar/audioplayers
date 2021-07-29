@@ -321,7 +321,7 @@ public class SwiftAudioplayersPlugin: NSObject, FlutterPlugin {
         // will interrupt any other audio sessions which are also nonmixable. AVAudioSessionCategoryPlayback should not be used with
         // AVAudioSessionCategoryOptionMixWithOthers option. If so, it prevents infoCenter from working correctly.
         let category = (playingRoute == "earpiece" || recordingActive) ? AVAudioSession.Category.playAndRecord : (
-            isNotification ? AVAudioSession.Category.ambient : AVAudioSession.Category.playback
+            isNotification ? AVAudioSession.Category.playback : AVAudioSession.Category.playback
         )
         let options = isNotification || duckAudio ? AVAudioSession.CategoryOptions.mixWithOthers : []
         
